@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   DrawerContentScrollView,
   DrawerItem,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import { Linking, Text, View, Animated, Dimensions } from 'react-native';
+import { Linking, Text, View, Dimensions } from 'react-native';
+import { DrawerAnimationContext } from '../../contexts/DrawerAnimationContext';
+import Animated from 'react-native-reanimated';
 
 const { width } = Dimensions.get('window');
 
 const CustomDrawerContent = (props) => {
-  const { progress, navigation } = props;
-  // const translateX = Animated.interpolate(progress, {
-  //   inputRange: [0, 1],
-  //   outputRange: [-100, 0],
-  // });
+  const { progress, navigation, setProgress } = props;
+
+  useEffect(() => {
+    progress && setProgress(progress);
+  }, [progress]);
+
+  const opacity = Animated.interpolate(progress, {
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
 
   return (
     <DrawerContentScrollView
@@ -21,13 +28,17 @@ const CustomDrawerContent = (props) => {
       scrollEnabled={false}
       contentContainerStyle={{
         flex: 1,
-        backgroundColor: 'blue',
+        backgroundColor: '#456f6f',
         paddingBottom: 25,
         overflow: 'visible',
       }}>
       {/* <DrawerItemList {...props} /> */}
 
       <View style={{ flexGrow: 1 }} />
+      {/* <Animated.View
+        style={{ backgroundColor: 'white', padding: 12, opacity: opacity }}>
+        <Text>hello</Text>
+      </Animated.View> */}
 
       <DrawerItem
         label="Details"
@@ -35,8 +46,7 @@ const CustomDrawerContent = (props) => {
         // style={styles.drawerItem}
         style={{
           marginVertical: 0,
-
-          backgroundColor: 'red',
+          // backgroundColor: 'red',
         }}
         onPress={() => navigation.navigate('Details')}
       />
@@ -47,13 +57,13 @@ const CustomDrawerContent = (props) => {
           // alignItems: 'flex-start',
           marginVertical: 0,
 
-          backgroundColor: 'red',
+          // backgroundColor: 'red',
         }}
         onPress={() => navigation.navigate('Home')}
         // icon={() => <AntDesign name="message1" color="white" size={16} />}
       />
       <View style={{ flexGrow: 1 }} />
-      <DrawerItem
+      {/* <DrawerItem
         label={({ focused, color }) => (
           <Text style={{ color }}>
             {focused ? 'Focused text' : 'Unfocused text'}
@@ -68,7 +78,7 @@ const CustomDrawerContent = (props) => {
         }}
         labelStyle={{ color: 'black', flex: 1 }}
         onPress={() => navigation.navigate('Details')}
-      />
+      /> */}
     </DrawerContentScrollView>
   );
 };

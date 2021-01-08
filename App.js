@@ -7,11 +7,15 @@
  */
 
 import React from 'react';
-import { View } from 'react-native';
 import App from './src/containers/App';
+import { DrawerAnimationProvider } from './src/contexts/DrawerAnimationContext';
 
 const app: () => React$Node = () => {
-  return <App />;
+  return (
+    <DrawerAnimationProvider>
+      <App />
+    </DrawerAnimationProvider>
+  );
 };
 
 export default app;

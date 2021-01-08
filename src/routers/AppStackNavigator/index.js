@@ -4,7 +4,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import DetailsScreen from '../../screens/DetailsScreen';
 import HomeScreen from '../../screens/HomeScreen';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { DrawerAnimationContext } from '../../contexts/DrawerAnimationContext';
+import Animated from 'react-native-reanimated';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator();
 
@@ -24,42 +27,74 @@ const Stack = createStackNavigator();
 */
 
 const AppStackNavigator = (props) => {
-  const { navigation } = props;
+  const { progress, navigation } = props;
+
+  // const { progress } = React.useContext(DrawerAnimationContext);
+
+  const scale = Animated.interpolate(progress, {
+    inputRange: [0, 1],
+    outputRange: [1, 0.75],
+  });
+  const backgroundScreen = Animated.interpolate(progress, {
+    inputRange: [0, 1],
+    outputRange: [1, 0.85],
+  });
+  const translateX = Animated.interpolate(progress, {
+    inputRange: [0, 1],
+    outputRange: [1, -90],
+  });
+  const borderRadius = Animated.interpolate(progress, {
+    inputRange: [0, 1],
+    outputRange: [0, 30],
+  });
+
   return (
-    <View
+    <Animated.View
       style={{
         flex: 1,
         justifyContent: 'center',
-        transform: [{ scale: 0.8 }, { rotate: '-5deg' }, { translateX: '50%' }],
+        transform: [
+          { scale: scale },
+          // { rotate: '-5deg' },
+          // { translateX: '50%' },
+          // { translateX: translateX },
+        ],
       }}>
-      <View
+      <Animated.View
         style={{
           position: 'absolute',
           height: '100%',
-          borderRadius: 30,
+          borderRadius: borderRadius,
           overflow: 'hidden',
           backgroundColor: 'white',
           opacity: 0.4,
-          transform: [{ translateX: '-50%' }, { scale: 0.8 }],
+          transform: [
+            // { translateX: translateX },
+            { translateX: translateX },
+            { scale: backgroundScreen },
+          ],
           zIndex: 0,
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
         }}>
         <HomeScreen />
-      </View>
-      <View
+      </Animated.View>
+
+      <Animated.View
         style={{
           flex: 1,
-          borderRadius: 30,
+          borderRadius: borderRadius,
           overflow: 'hidden',
         }}>
         <Stack.Navigator
           screenOptions={{
-            headerLeft: () => (
-              <TouchableOpacity
-                transparent
-                onPress={() => navigation.openDrawer()}>
-                <Text>Toggle</Text>
-              </TouchableOpacity>
-            ),
+            // headerLeft: () => (
+            //   <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            //     <Text>Toggle</Text>
+            //   </TouchableOpacity>
+            // ),
+            header: () => null,
           }}>
           <Stack.Screen
             name="Home"
@@ -75,8 +110,8 @@ const AppStackNavigator = (props) => {
           />
           <Stack.Screen name="Details" component={DetailsScreen} />
         </Stack.Navigator>
-      </View>
-    </View>
+      </Animated.View>
+    </Animated.View>
   );
 };
 
