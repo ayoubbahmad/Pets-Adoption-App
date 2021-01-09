@@ -9,6 +9,7 @@ export default function Categories() {
   const onPressItem = (index) => setSelectedItem(index);
   return (
     <FlatList
+      showsHorizontalScrollIndicator={false}
       data={data.slice(0, 10)}
       keyExtractor={(item) => `${item.iconName}`}
       renderItem={({ item, index }) => {
@@ -32,6 +33,7 @@ export default function Categories() {
 const styles = StyleSheet.create({
   contentContainerStyle: {
     paddingHorizontal: 24,
+    alignSelf: 'baseline',
   },
   seperator: {
     width: 24,

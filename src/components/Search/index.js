@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   },
   searchTextInput: {
     flex: 1,
+    height: '100%',
   },
   optionsButton: {
     padding: 12,

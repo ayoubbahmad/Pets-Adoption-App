@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Header from '../../components/Header';
 import Search from '../../components/Search';
+import AnimalsList from '../../containers/AnimalsList';
 import Categories from '../../containers/Categories';
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
@@ -21,7 +22,13 @@ export default function HomeScreen(props) {
           <Search />
         </View>
 
-        <Categories />
+        <View>
+          <Categories />
+        </View>
+
+        <View style={{ flex: 1 }}>
+          <AnimalsList />
+        </View>
       </View>
     </View>
   );
