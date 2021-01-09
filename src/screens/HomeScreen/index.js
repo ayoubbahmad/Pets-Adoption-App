@@ -20,6 +20,7 @@ export default function HomeScreen(props) {
         <View style={styles.searchContainer}>
           <Search />
         </View>
+
         <Categories />
       </View>
     </View>
