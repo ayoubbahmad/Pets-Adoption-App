@@ -9,13 +9,14 @@ interface IProps extends TouchableOpacityProps {
 }
 
 export default function CustomDrawerItem(props: IProps) {
-  const { title, icon, ...touchableProps } = props;
+  const { title, icon, titleStyle, ...touchableProps } = props;
   return (
     <TouchableOpacity style={styles.container} {...touchableProps}>
       <View style={styles.icon}>
-        <Icon {...icon} />
+        {/* <Icon {...icon} /> */}
+        {icon}
       </View>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={[styles.title, titleStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 }

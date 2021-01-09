@@ -7,13 +7,16 @@
  */
 
 import React from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import App from './src/containers/App';
 import { DrawerAnimationProvider } from './src/contexts/DrawerAnimationContext';
 
 const app: () => React$Node = () => {
   return (
     <DrawerAnimationProvider>
-      <App />
+      <SafeAreaProvider>
+        <App />
+      </SafeAreaProvider>
     </DrawerAnimationProvider>
   );
 };

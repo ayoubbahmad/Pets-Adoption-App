@@ -12,6 +12,7 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import Zocial from 'react-native-vector-icons/Zocial';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import { Text } from 'react-native';
 
 export interface IconIProps {
   name: String;
@@ -38,5 +39,6 @@ const IconeAdapter = (props) => {
 };
 
 export default function Icon(props: IconIProps) {
-  return <IconeAdapter {...props} size={24} color="#ffffffA0" />;
+  return <Text>hello</Text>;
+  // <IconeAdapter size={24} color="#ffffffA0" {...props} />;
 }

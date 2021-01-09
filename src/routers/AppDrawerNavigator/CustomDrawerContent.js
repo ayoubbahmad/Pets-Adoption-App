@@ -1,14 +1,13 @@
-import React, { useContext, useEffect } from 'react';
-import {
-  DrawerContentScrollView,
-  DrawerItem,
-  DrawerItemList,
-  // DrawerItemList,
-} from '@react-navigation/drawer';
+import { DrawerContentScrollView } from '@react-navigation/drawer';
+import React, { useEffect, useContext } from 'react';
 import { Text, View } from 'react-native';
-import { DrawerAnimationContext } from '../../contexts/DrawerAnimationContext';
 import Animated from 'react-native-reanimated';
 import CustomDrawerItem from '../../components/CustomDrawerItem';
+import { DrawerAnimationContext } from '../../contexts/DrawerAnimationContext';
+
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const CustomDrawerContent = (props) => {
   const { progress, navigation } = props;
@@ -33,94 +32,34 @@ const CustomDrawerContent = (props) => {
         backgroundColor: 'transparent',
         paddingBottom: 25,
         overflow: 'visible',
-      }}>
+      }}
+    >
       <View style={{ flexGrow: 1 }} />
-      {/* // settings-sharp Ionicons
- // settings MaterialIcons // plus FontAwesome // heart FontAwesome 
-			// mail Entypo // envelope FontAwesome // envelope FontAwesome5 //
-      hand-holding-heart FontAwesome5 // pets MaterialIcons // person Ionicons
-      // paw Foundation // hand-heart MaterialCommunityIcons */}
-      {/* <DrawerItemList /> */}
-
-      <Animated.View style={{ opacity: opacity }}>
-        <CustomDrawerItem
-          title="Adoption"
-          icon={{ name: 'pets', type: 'MaterialIcons' }}
-          onPress={() => navigation.navigate('Details')}
-        />
-        <CustomDrawerItem
-          title="Add pet"
-          icon={{ name: 'plus', type: 'FontAwesome' }}
-          onPress={() => navigation.navigate('Home')}
-        />
-        <CustomDrawerItem
-          title="Favorites"
-          icon={{ name: 'heart', type: 'FontAwesome' }}
-        />
-        <CustomDrawerItem
-          title="Messages"
-          icon={{ name: 'envelope', type: 'FontAwesome' }}
-        />
-        <CustomDrawerItem
-          title="Profile"
-          icon={{ name: 'person', type: 'Ionicons' }}
-        />
-        {/* <CustomDrawerItem
-          title="Home"
-          icon={{ name: 'settings-sharp', type: 'Ionicons' }}
-        /> */}
-      </Animated.View>
-
-      {/* <DrawerItem
-        label="Messages"
-        labelStyle={styles.drawerLabel}
-        style={styles.drawerItem}
-        style={{
-          marginVertical: 0,
-          // backgroundColor: 'red',
-          overflow: 'visible',
-        }}
-        labelStyle={{ fontWeight: '600' }}
+      {/* <Animated.View style={{ opacity: opacity }}> */}
+      <CustomDrawerItem
+        title="Adoption"
+        icon={<MaterialIcons name="pets" color="#ebf5f5" size={24} />}
         onPress={() => navigation.navigate('Details')}
-        icon={() => (
-          <View
-            style={{
-              width: 24,
-              height: 24,
-              backgroundColor: 'grey',
-              borderRadius: 16,
-            }}
-          />
-        )}
+        titleStyle={{ color: '#ebf5f5' }}
       />
-      <DrawerItem
-        label={({ focused, color }) => (
-          <Text
-            ellipsizeMode="clip"
-            style={{ color, fontSize: 20, fontWeight: '600' }}>
-            Homeeee
-            {focused ? 'Focused text' : 'Unfocused text'}
-          </Text>
-        )}
-        labelStyle={{ color: 'white', marginLeft: -16 }}
-        style={{
-          // alignItems: 'flex-start',
-          marginVertical: 0,
-
-          // backgroundColor: 'red',
-        }}
+      <CustomDrawerItem
+        title="Add pet"
+        icon={<FontAwesome name="plus" color="#82afaf" size={24} />}
         onPress={() => navigation.navigate('Home')}
-        icon={() => (
-          <View
-            style={{
-              width: 24,
-              height: 24,
-              backgroundColor: 'grey',
-              borderRadius: 16,
-            }}
-          />
-        )}
-      /> */}
+      />
+      <CustomDrawerItem
+        title="Favorites"
+        icon={<FontAwesome name="heart" color="#82afaf" size={24} />}
+      />
+      <CustomDrawerItem
+        title="Messages"
+        icon={<FontAwesome name="envelope" color="#82afaf" size={24} />}
+      />
+      <CustomDrawerItem
+        title="Profile"
+        icon={<Ionicons name="person" color="#82afaf" size={24} />}
+      />
+      {/* </Animated.View> */}
 
       <View style={{ flexGrow: 1 }} />
     </DrawerContentScrollView>

@@ -15,7 +15,7 @@
 // import { Text, View } from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import * as React from 'react';
+import React, { useEffect } from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -54,10 +54,10 @@ const AppStackNavigator = (props) => {
     outputRange: [0, 30],
   });
 
-  const opacity = Animated.interpolate(progress, {
-    inputRange: [0, 0.5, 1],
-    outputRange: [0, 0, 0.4],
-  });
+  // const opacity = Animated.interpolate(progress, {
+  //   inputRange: [0, 0.5, 1],
+  //   outputRange: [0, 0, 0.4],
+  // });
 
   return (
     <Animated.View
@@ -70,12 +70,8 @@ const AppStackNavigator = (props) => {
           { translateX: translateXContainer },
           // { translateX: translateX },
         ],
-        // shadowColor: '#000000',
-        // shadowOffset: { height: 3, width: -3 },
-        // shadowOpacity: opacity,
-        // shadowRadius: 20,
-        // overflow: 'visible',
-      }}>
+      }}
+    >
       <Animated.View
         style={{
           position: 'absolute',
@@ -93,7 +89,8 @@ const AppStackNavigator = (props) => {
           justifyContent: 'center',
           alignItems: 'center',
           width: '100%',
-        }}>
+        }}
+      >
         <HomeScreen />
       </Animated.View>
 
@@ -102,7 +99,8 @@ const AppStackNavigator = (props) => {
           flex: 1,
           borderRadius: borderRadius,
           overflow: 'hidden',
-        }}>
+        }}
+      >
         <Stack.Navigator
           screenOptions={{
             // headerLeft: () => (
@@ -111,19 +109,9 @@ const AppStackNavigator = (props) => {
             //   </TouchableOpacity>
             // ),
             header: () => null,
-          }}>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            // options={
-            //   {
-            //      header: (props) => {
-            //        // console.log(props);
-            //        return null;
-            //     },
-            //   }
-            // }
-          />
+          }}
+        >
+          <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Details" component={DetailsScreen} />
         </Stack.Navigator>
       </Animated.View>
