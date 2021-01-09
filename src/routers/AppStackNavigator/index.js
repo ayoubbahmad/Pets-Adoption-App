@@ -23,11 +23,14 @@ import DetailsScreen from '../../screens/DetailsScreen';
 import HomeScreen from '../../screens/HomeScreen';
 import { DrawerAnimationContext } from '../../contexts/DrawerAnimationContext';
 import Animated from 'react-native-reanimated';
+import { useIsDrawerOpen } from '@react-navigation/drawer';
 
 const Stack = createStackNavigator();
 
 const AppStackNavigator = (props) => {
   const { progress } = React.useContext(DrawerAnimationContext);
+
+  const isDraweOpen = useIsDrawerOpen();
 
   const scale = Animated.interpolate(progress, {
     inputRange: [0, 1],
@@ -91,7 +94,8 @@ const AppStackNavigator = (props) => {
           width: '100%',
         }}
       >
-        <HomeScreen />
+        {/* {isDraweOpen && props.route.name === 'HomeScreen' && <HomeScreen />} */}
+        {isDraweOpen && <HomeScreen />}
       </Animated.View>
 
       <Animated.View
@@ -103,11 +107,6 @@ const AppStackNavigator = (props) => {
       >
         <Stack.Navigator
           screenOptions={{
-            // headerLeft: () => (
-            //   <TouchableOpacity onPress={() => navigation.openDrawer()}>
-            //     <Text>Toggle</Text>
-            //   </TouchableOpacity>
-            // ),
             header: () => null,
           }}
         >
