@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Animated } from 'react-native';
+import Animated from 'react-native-reanimated';
+// import { Animated } from 'react-native';
 
 import DrawerAnimationContext from './context';
 

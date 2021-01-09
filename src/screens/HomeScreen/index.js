@@ -10,8 +10,9 @@ export default function HomeScreen(props) {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#c1cdd0',
       }}>
-      <Text style={{ padding: 20 }}>HomeScreen</Text>
+      <Text style={{ padding: 20 }}>Add pet Screen</Text>
       <TouchableOpacity
         onPress={() => navigation.openDrawer()}
         style={{ backgroundColor: 'blue', padding: 8, borderRadius: 4 }}>

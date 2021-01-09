@@ -1,112 +1,140 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import CustomDrawerContent from './CustomDrawerContent';
 import AppStackNavigator from '../AppStackNavigator';
-import { Text, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import { DrawerAnimationContext } from '../../contexts/DrawerAnimationContext';
 import Animated from 'react-native-reanimated';
+import CustomDrawerItem from '../../components/CustomDrawerItem';
 const Drawer = createDrawerNavigator();
 
 const AppDrawerNavigator = () => {
-  // const drawerAnimationContext = useContext(DrawerAnimationContext);
-  const [progress, setProgress] = useState(new Animated.Value(0));
-  // console.log(drawerAnimationContext);
+  const { progress } = useContext(DrawerAnimationContext);
+
   const translateX = Animated.interpolate(progress, {
     inputRange: [0, 1],
     outputRange: [-200, 0],
   });
+
   const opacity = Animated.interpolate(progress, {
-    inputRange: [0, 0.75, 1],
+    inputRange: [0, 0.78, 1],
     outputRange: [0, 0, 1],
   });
 
   return (
     <>
-      <Animated.View
+      <SafeAreaView
         style={{
-          overflow: 'visible',
-          width: '100%',
           position: 'absolute',
-          top: 50,
+          elevation: 1,
+          zIndex: 2,
+          top: 0,
           left: 0,
-          zIndex: 2,
-          opacity: opacity,
-          flexDirection: 'row',
-          alignItems: 'center',
-          transform: [{ translateX: translateX }],
         }}>
-        <View
+        <Animated.View
           style={{
-            height: 40,
-            width: 40,
-            borderRadius: 20,
-            backgroundColor: 'white',
-            margin: 12,
-          }}
-        />
-        <Text style={{ color: 'white' }}>User Name</Text>
-      </Animated.View>
-      <Drawer.Navigator
-        initialRouteName="Screens"
-        drawerType={'slide'}
-        overlayColor="transparent"
-        // activeTintColor={'red'}
-        // inactiveTintColor={'red'}
-        // activeBackgroundColor={'red'}
-        // inactiveBackgroundColor={'red'}
-        drawerStyle={{
-          width: '60%',
-          overflow: 'visible',
-          // backgroundColor: 'red',
-          marginRight: -30,
-        }}
-        sceneContainerStyle={{
-          backgroundColor: '#456f6f',
-          overflow: 'visible',
-          // paddingVertical: '20%',
-          alignSelf: 'center',
-          // transform: [],
-          zIndex: 2,
-        }}
-        drawerContent={(props) => {
-          return <CustomDrawerContent {...props} setProgress={setProgress} />;
-        }}>
-        <Drawer.Screen name="Screens">
-          {(props) => {
-            return <AppStackNavigator {...props} progress={progress} />;
-          }}
-        </Drawer.Screen>
-        {/* <Drawer.Screen name="DetailsScreen" component={DetailsScreen} /> */}
-      </Drawer.Navigator>
+            opacity: opacity,
+            flexDirection: 'row',
+            alignItems: 'center',
+            transform: [{ translateX: translateX }],
+          }}>
+          <View
+            style={{
+              height: 44,
+              width: 44,
+              borderRadius: 22,
+              backgroundColor: 'white',
+              marginHorizontal: 24,
+            }}
+          />
+          <View>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 24,
+                fontWeight: '600',
+                color: '#ffffffC0',
+              }}>
+              Ayoub bahmad
+            </Text>
+            <Text style={{ color: 'white', opacity: 0.5 }}>Active status</Text>
+          </View>
+        </Animated.View>
+      </SafeAreaView>
 
-      <Animated.View
+      <View
         style={{
-          overflow: 'visible',
-          width: '100%',
-          opacity: opacity,
-          position: 'absolute',
-          bottom: 40,
-          left: 0,
-
-          flexDirection: 'row',
-          alignItems: 'center',
-          transform: [{ translateX: translateX }],
+          backgroundColor: '#306060',
+          flex: 1,
         }}>
-        <View
-          style={{
-            height: 40,
-            width: 40,
-            borderRadius: 20,
-            backgroundColor: 'grey',
-            margin: 12,
+        <Drawer.Navigator
+          initialRouteName="Screens"
+          drawerType={'slide'}
+          overlayColor="transparent"
+          drawerContentOptions={{
+            // activeBackgroundColor: 'blue',
+            style: { overflow: 'visible' },
           }}
-        />
-        <Text style={{ color: 'blue' }}>
-          Settings | Log Out ................. ........
-        </Text>
-      </Animated.View>
+          drawerStyle={{
+            width: '65%',
+            // overflow: 'visible',
+            backgroundColor: 'transparent',
+            marginRight: -30,
+          }}
+          sceneContainerStyle={{
+            backgroundColor: 'transparent',
+            overflow: 'visible',
+            // paddingVertical: '20%',
+            alignSelf: 'center',
+            // transform: [],
+            zIndex: 1,
+          }}
+          drawerContent={(props) => {
+            // setProgress(props.progress);
+            return <CustomDrawerContent {...props} />;
+          }}>
+          <Drawer.Screen name="Screens">
+            {(props) => {
+              return <AppStackNavigator {...props} progress={progress} />;
+            }}
+          </Drawer.Screen>
+          {/* <Drawer.Screen name="DetailsScreen" component={DetailsScreen} /> */}
+        </Drawer.Navigator>
+      </View>
+
+      <SafeAreaView
+        style={{ position: 'absolute', zIndex: 2, bottom: 0, left: 0 }}>
+        <Animated.View
+          style={{
+            opacity: opacity,
+            flexDirection: 'row',
+            alignItems: 'center',
+            transform: [{ translateX: translateX }],
+          }}>
+          <CustomDrawerItem
+            title={`Settings    |    Log Out`}
+            icon={{ name: 'settings-sharp', type: 'Ionicons' }}
+          />
+          {/* <View
+            style={{
+              height: 40,
+              width: 40,
+              borderRadius: 20,
+              backgroundColor: 'grey',
+              margin: 12,
+            }}
+          /> */}
+          {/* <Text style={{ color: 'blue' }}>
+            Settings | Log Out ................. ........
+          </Text>
+					<CustomDrawerItem
+          title="Home"
+          icon={{ name: 'settings-sharp', type: 'Ionicons' }}
+        /> */}
+        </Animated.View>
+      </SafeAreaView>
     </>
   );
 };

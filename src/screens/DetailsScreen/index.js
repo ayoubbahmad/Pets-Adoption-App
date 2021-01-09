@@ -10,8 +10,9 @@ export default function DetailsScreen(props) {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#debd8a',
       }}>
-      <Text style={{ padding: 20 }}>DetailsScreen</Text>
+      <Text style={{ padding: 20 }}>Adoption Screen</Text>
       <TouchableOpacity
         onPress={() => navigation.openDrawer()}
         style={{ backgroundColor: 'blue', padding: 8, borderRadius: 4 }}>

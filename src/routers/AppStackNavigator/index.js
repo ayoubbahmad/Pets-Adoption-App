@@ -1,16 +1,3 @@
-import * as React from 'react';
-
-import { createStackNavigator } from '@react-navigation/stack';
-
-import DetailsScreen from '../../screens/DetailsScreen';
-import HomeScreen from '../../screens/HomeScreen';
-import { Text, View } from 'react-native';
-import { DrawerAnimationContext } from '../../contexts/DrawerAnimationContext';
-import Animated from 'react-native-reanimated';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
-const Stack = createStackNavigator();
-
 /**
  * borderRadius: new Animated.Value(100)
  *
@@ -25,27 +12,51 @@ const Stack = createStackNavigator();
           style={{
     borderRadius: this.state.borderRadius,
 */
+// import { Text, View } from 'react-native';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import * as React from 'react';
+
+import { createStackNavigator } from '@react-navigation/stack';
+
+import DetailsScreen from '../../screens/DetailsScreen';
+import HomeScreen from '../../screens/HomeScreen';
+import { DrawerAnimationContext } from '../../contexts/DrawerAnimationContext';
+import Animated from 'react-native-reanimated';
+
+const Stack = createStackNavigator();
 
 const AppStackNavigator = (props) => {
-  const { progress, navigation } = props;
-
-  // const { progress } = React.useContext(DrawerAnimationContext);
+  const { progress } = React.useContext(DrawerAnimationContext);
 
   const scale = Animated.interpolate(progress, {
     inputRange: [0, 1],
-    outputRange: [1, 0.75],
+    outputRange: [1, 0.73],
   });
+
   const backgroundScreen = Animated.interpolate(progress, {
     inputRange: [0, 1],
     outputRange: [1, 0.85],
   });
+
   const translateX = Animated.interpolate(progress, {
     inputRange: [0, 1],
-    outputRange: [1, -90],
+    outputRange: [0, -85],
   });
+
+  const translateXContainer = Animated.interpolate(progress, {
+    inputRange: [0, 1],
+    outputRange: [0, 0],
+  });
+
   const borderRadius = Animated.interpolate(progress, {
     inputRange: [0, 1],
     outputRange: [0, 30],
+  });
+
+  const opacity = Animated.interpolate(progress, {
+    inputRange: [0, 0.5, 1],
+    outputRange: [0, 0, 0.4],
   });
 
   return (
@@ -56,9 +67,14 @@ const AppStackNavigator = (props) => {
         transform: [
           { scale: scale },
           // { rotate: '-5deg' },
-          // { translateX: '50%' },
+          { translateX: translateXContainer },
           // { translateX: translateX },
         ],
+        // shadowColor: '#000000',
+        // shadowOffset: { height: 3, width: -3 },
+        // shadowOpacity: opacity,
+        // shadowRadius: 20,
+        // overflow: 'visible',
       }}>
       <Animated.View
         style={{
@@ -101,10 +117,10 @@ const AppStackNavigator = (props) => {
             component={HomeScreen}
             // options={
             //   {
-            // header: (props) => {
-            //   // console.log(props);
-            //   return null;
-            // },
+            //      header: (props) => {
+            //        // console.log(props);
+            //        return null;
+            //     },
             //   }
             // }
           />
