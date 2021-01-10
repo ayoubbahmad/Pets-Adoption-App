@@ -1,34 +1,45 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export default function AnimalCardItem() {
+export default function AnimalCardItem(props) {
+  const {
+    animalName,
+    animalType,
+    animalGender = 'male',
+    imageSource,
+    animalAge,
+    distance,
+    backgroundColor = '#ced7d9',
+    onPressItem,
+    id,
+  } = props;
+
+  onPress = () => {
+    onPressItem(id);
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image
-          height={150}
-          width={150}
-          source={require('../../assets/images/animals/cats/cat1.png')}
-          style={styles.imageStyle}
-        />
+    <TouchableOpacity activeOpacity={0.8} style={styles.container} onPress={onPress}>
+      <View style={[styles.imageContainer, { backgroundColor }]}>
+        <Image height={100} width={100} source={imageSource} style={styles.imageStyle} />
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.contentHeader}>
-          <Text style={styles.animalName}>Sola</Text>
-          <Ionicons name="female" size={24} color="#ababab" />
+          <Text style={styles.animalName}>{animalName}</Text>
+          <Ionicons name={animalGender} size={24} color="#ababab" />
         </View>
 
-        <Text style={styles.animalType}>Abyssinian cat</Text>
-        <Text style={styles.animalAge}>2 years old</Text>
+        <Text style={styles.animalType}>{animalType}</Text>
+        <Text style={styles.animalAge}>{animalAge}</Text>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Ionicons name="md-location-sharp" size={20} color="#306060" style={{ marginRight: 8 }} />
-
-          <Text style={styles.location}>Distance: 3.6 Km</Text>
+          <Text style={styles.location}>{distance}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -42,7 +53,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     height: 210,
     width: 180,
-    backgroundColor: '#ced7d9',
+
     overflow: 'visible',
     paddingBottom: 30,
 
@@ -55,11 +66,11 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   imageStyle: {
-    height: 200,
-    width: 170,
+    height: 230,
+    width: 180,
     borderRadius: 20,
     overflow: 'visible',
-    resizeMode: 'cover',
+    resizeMode: 'contain',
     bottom: 20,
   },
   contentContainer: {
