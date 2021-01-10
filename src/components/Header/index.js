@@ -26,7 +26,6 @@ export default function Header(props: IHeaderProps) {
           <Text style={styles.locationValue}>Casablanca, Morocco</Text>
         </View>
       </View>
-
       <View style={styles.avatar} />
     </View>
   );

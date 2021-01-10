@@ -95,7 +95,7 @@ const AppStackNavigator = (props) => {
         }}
       >
         {/* {isDraweOpen && props.route.name === 'HomeScreen' && <HomeScreen />} */}
-        {isDraweOpen && <HomeScreen />}
+        {isDraweOpen && <DetailsScreen />}
       </Animated.View>
 
       <Animated.View

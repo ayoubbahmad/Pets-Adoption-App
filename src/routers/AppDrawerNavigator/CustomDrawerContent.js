@@ -39,13 +39,13 @@ const CustomDrawerContent = (props) => {
       <CustomDrawerItem
         title="Adoption"
         icon={<MaterialIcons name="pets" color="#ebf5f5" size={24} />}
-        onPress={() => navigation.navigate('Details')}
+        onPress={() => navigation.navigate('Home')}
         titleStyle={{ color: '#ebf5f5' }}
       />
       <CustomDrawerItem
         title="Add pet"
         icon={<FontAwesome name="plus" color="#82afaf" size={24} />}
-        onPress={() => navigation.navigate('Home')}
+        onPress={() => navigation.navigate('Details')}
       />
       <CustomDrawerItem
         title="Favorites"
