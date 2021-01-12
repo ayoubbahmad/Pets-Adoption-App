@@ -45,7 +45,6 @@ const CustomDrawerContent = (props) => {
       <CustomDrawerItem
         title="Add pet"
         icon={<FontAwesome name="plus" color="#82afaf" size={24} />}
-        onPress={() => navigation.navigate('Details')}
       />
       <CustomDrawerItem
         title="Favorites"
